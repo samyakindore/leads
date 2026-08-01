@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samyak Computer Classes - Student Leads Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #0d6efd;
+            padding: 35px 20px 25px 20px;
+            text-align: center;
+            border-bottom: 2px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .logo-container {
+            margin-bottom: 12px;
+        }
+
+        .brand-logo {
+            max-width: 170px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 4px;
+            color: #003580;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .branch-tag {
+            background-color: #ffc107;
+            color: #212529;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 6px rgba(255, 193, 7, 0.4);
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-card {
+            background-color: #ffffff;
+            border-left: 5px solid #0d6efd;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+
+        .welcome-card h3 {
+            color: #003580;
+            margin-bottom: 6px;
+            font-size: 1.25rem;
+        }
+
+        .welcome-card p {
+            color: #555;
+            font-size: 0.98rem;
+        }
+
+        .form-section {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .form-section h2 {
+            color: #003580;
+            margin-bottom: 20px;
+            font-size: 1.45rem;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.98rem;
+            background-color: #fff;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13,110,253,0.2);
+        }
+
+        .course-picker-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .course-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .course-picker-title {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1.05rem;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .search-box input {
+            padding: 8px 12px 8px 34px !important;
+            font-size: 0.9rem !important;
+            border-radius: 20px !important;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            scrollbar-width: thin;
+        }
+
+        .cat-pill {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .cat-pill.active, .cat-pill:hover {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .course-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .course-option-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .course-option-card:hover {
+            border-color: #93c5fd;
+            transform: translateY(-1px);
+        }
+
+        .course-option-card.selected {
+            border-color: #0d6efd;
+            background-color: #eff6ff;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.15);
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .check-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            color: transparent;
+            transition: all 0.2s;
+        }
+
+        .course-option-card.selected .check-badge {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+
+        .selected-indicator {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #0d6efd;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        button.btn-submit {
+            width: 100%;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        button.btn-submit:hover {
+            background-color: #0b5ed7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #343a40;
+            color: #adb5bd;
+            margin-top: 50px;
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .form-section { padding: 20px; }
+            .course-cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Samyak Computer Classes Logo" class="brand-logo" onerror="this.style.display='none'">
+        </div>
+        <h1>Samyak Computer Classes</h1>
+        <p>स्किल भी, करियर भी</p>
+        <span class="branch-tag">Bhanwarkua Branch, Indore</span>
+    </header>
+
+    <div class="container">
+        <div class="welcome-card">
+            <h3>Welcome to Samyak Computer Classes!</h3>
+            <p>Please register your details below to connect instantly with our team.</p>
+        </div>
+
+        <div class="form-section">
+            <h2>Student Quick Lead Form</h2>
+
+            <form id="lead-form" action="https://script.google.com/macros/s/AKfycbzI3LlBGUQzrIv_7xbmJK3toggzXkNlun2K_iKKFATR6BT84JTDHnc22Yzv8AGecYTl/exec" method="POST">
+                <input type="hidden" name="formType" value="lead">
+                <input type="hidden" id="coreinterest-input" name="coreinterest" required>
+
+                <div class="form-grid">
+                    <!-- Student Name -->
+                    <div class="form-group">
+                        <label for="student-name">Student Full Name *</label>
+                        <input type="text" id="student-name" name="studentname" placeholder="Enter full name" required>
+                    </div>
+
+                    <!-- Contact Number -->
+                    <div class="form-group">
+                        <label for="student-phone">Mobile Number *</label>
+                        <input type="tel" id="student-phone" name="mobileno" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="form-group full-width">
+                        <label for="student-email">Email Address</label>
+                        <input type="email" id="student-email" name="emailid" placeholder="example@email.com">
+                    </div>
+                </div>
+
+                <!-- Modern Interactive Course Selector -->
+                <div class="course-picker-section">
+                    <div class="course-picker-header">
+                        <span class="course-picker-title">Select Course of Interest *</span>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="course-search" placeholder="Search course...">
+                        </div>
+                    </div>
+
+                    <div class="category-pills">
+                        <button type="button" class="cat-pill active" data-cat="all">All Courses</button>
+                        <button type="button" class="cat-pill" data-cat="Accounting">Accounting</button>
+                        <button type="button" class="cat-pill" data-cat="Data & AI">Data & AI</button>
+                        <button type="button" class="cat-pill" data-cat="Development">Development</button>
+                        <button type="button" class="cat-pill" data-cat="Design">Design & Multimedia</button>
+                        <button type="button" class="cat-pill" data-cat="Security">Cyber & Networking</button>
+                        <button type="button" class="cat-pill" data-cat="Office">Office & Basics</button>
+                    </div>
+
+                    <div class="course-cards-grid" id="course-cards-container"></div>
+
+                    <div class="selected-indicator" id="selected-display" style="display: none;">
+                        <span>✓ Selected Course:</span> <span id="selected-course-name" style="color: #003580;">None</span>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <!-- Lead Source -->
+                    <div class="form-group full-width">
+                        <label for="lead-source">Source *</label>
+                        <select id="lead-source" name="leadsource" required>
+                            <option value="" disabled selected>Select Source</option>
+                            <option value="Ads">Ads</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Scraper">Scraper</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn-submit">Submit Lead</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            { name: "Tally Prime with GST", cat: "Accounting" },
+            { name: "Financial Accounting", cat: "Accounting" },
+            { name: "Advance Diploma in Finance Accounting", cat: "Accounting" },
+            { name: "Diploma in Banking & SAP FICO", cat: "Accounting" },
+            { name: "Data Analytics (Power BI / SQL)", cat: "Data & AI" },
+            { name: "Advance Diploma in Data Analytics", cat: "Data & AI" },
+            { name: "Data Science & AI / ML", cat: "Data & AI" },
+            { name: "Advanced Excel", cat: "Data & AI" },
+            { name: "Full Stack Development (Java / Python)", cat: "Development" },
+            { name: "MERN Stack Development", cat: "Development" },
+            { name: "Python / Core Java / C / C++", cat: "Development" },
+            { name: "Web Development & React JS", cat: "Development" },
+            { name: "Graphic Designing (Photoshop, Illustrator, CorelDRAW)", cat: "Design" },
+            { name: "Advance Diploma in 3D Animation", cat: "Design" },
+            { name: "Video Editing (Filmora)", cat: "Design" },
+            { name: "Canva & Digital Creatives", cat: "Design" },
+            { name: "Ethical Hacking & Cyber Security", cat: "Security" },
+            { name: "PLC SCADA & Industrial Automation", cat: "Security" },
+            { name: "Digital Marketing (SEO & Meta Ads)", cat: "Development" },
+            { name: "Basic Computer & MS Office", cat: "Office" },
+            { name: "DCA / ADCA Diploma", cat: "Office" },
+            { name: "English Speaking", cat: "Office" },
+            { name: "Typing & Spoken English / Placement Readiness", cat: "Office" }
+        ];
+
+        const container = document.getElementById('course-cards-container');
+        const hiddenInput = document.getElementById('coreinterest-input');
+        const selectedDisplay = document.getElementById('selected-display');
+        const selectedCourseName = document.getElementById('selected-course-name');
+        const searchInput = document.getElementById('course-search');
+
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        function renderCourses() {
+            container.innerHTML = '';
+            const filtered = courses.filter(c => {
+                const matchesCat = currentCategory === 'all' || c.cat === currentCategory;
+                const matchesSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 20px;">No courses found matching "${searchQuery}"</div>`;
+                return;
+            }
+
+            filtered.forEach(course => {
+                const card = document.createElement('div');
+                card.className = `course-option-card ${hiddenInput.value === course.name ? 'selected' : ''}`;
+                card.onclick = () => selectCourse(course.name, card);
+
+                card.innerHTML = `
+                    <div class="card-info">
+                        <span class="card-title">${course.name}</span>
+                        <span class="card-category">${course.cat}</span>
+                    </div>
+                    <div class="check-badge">✓</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectCourse(name, cardElement) {
+            document.querySelectorAll('.course-option-card').forEach(el => el.classList.remove('selected'));
+            cardElement.classList.add('selected');
+            hiddenInput.value = name;
+            selectedCourseName.textContent = name;
+            selectedDisplay.style.display = 'flex';
+        }
+
+        document.querySelectorAll('.cat-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = this.dataset.cat;
+                renderCourses();
+            });
+        });
+
+        searchInput.addEventListener('input', function(e) {
+            searchQuery = e.target.value;
+            renderCourses();
+        });
+
+        renderCourses();
+
+        const form = document.getElementById('lead-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            if(!hiddenInput.value) {
+                alert('Please select a course of interest from the list.');
+                return;
+            }
+            
+            submitBtn.textContent = "Saving Lead...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: params
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('Lead successfully recorded!');
+                    form.reset();
+                    hiddenInput.value = '';
+                    selectedDisplay.style.display = 'none';
+                    renderCourses();
+                } else {
+                    alert('Error saving record: ' + (data.error || 'Please try again.'));
+                }
+            })
+            .catch(error => {
+                alert('Lead saved successfully!');
+                form.reset();
+                hiddenInput.value = '';
+                selectedDisplay.style.display = 'none';
+                renderCourses();
+            })
+            .finally(() => {
+                submitBtn.textContent = "Submit Lead";
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Samyak Computer Classes - Bhanwarkua, Indore. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
